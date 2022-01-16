@@ -141,5 +141,21 @@ Undo commits and create a new branch (better within collaborating teams)
     git revert <commit id>
 
 
+## Github
+
+### Connect to Github (from existing local repo )
+
+    git remote origin <"github-url">
+    git remote -v
+
+
+1. Create new repository in Github
+2. connect local repo to Github repo
+3. check, if orign equals remote github url
+
+
+
+
+
 
 
