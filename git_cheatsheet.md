@@ -149,13 +149,15 @@ Undo commits and create a new branch (better within collaborating teams)
 
 ### Connect to Github (from existing local repo )
 
-    git remote origin <"github-url">
+    git remote add origin <"github-url">
     git remote -v
+    git push origin <branchname>
 
 
 1. Create new repository in Github
 2. connect local repo to Github repo
 3. check, if orign equals remote github url
+4. push to remote repository
 
 
 
