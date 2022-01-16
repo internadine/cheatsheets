@@ -143,6 +143,10 @@ Undo commits and create a new branch (better within collaborating teams)
 
 ## Github
 
+### Cloning repositories
+
+    git clone <github-url>
+
 ### Connect to Github (from existing local repo )
 
     git remote origin <"github-url">
