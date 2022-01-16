@@ -26,7 +26,7 @@ Git status (also check, if you are already in a repo before initializing)
 
     git status
 
-Git logging
+Git logging  (end log with "Q")
 
     git log
     git log --oneline
@@ -99,6 +99,46 @@ Comparing two commits
 
     git diff commit1..commit2
 
+### Reversing 
+
+Checkout to older commit (result in detached HEAD)
+
+    git checkout <commit id from log>
+
+Get back to last branch with 
+
+    git switch -
+
+While in detached HEAD, create new branch and switch to it
+
+    git switch -c <new-branch-name>
+    git add . 
+    git commit -m "new branch with stuff from older version"
+    git switch master
+
+Discarding changes in file 
+
+    git checkout HEAD <filename>
+
+Discarding changes after last commit
+
+    git restore <filename>
+
+Unstaging 
+
+    git restore --staged <filename>
+
+Undo commits (delete commits but not progress in file, e.g if you want progress on another branch)
+
+    git reset <commit id>
+
+Undo commits AND all changes since this commit
+
+    git reset --hard <commit id>
+
+Undo commits and create a new branch (better within collaborating teams)
+
+    git revert <commit id>
 
 
 
