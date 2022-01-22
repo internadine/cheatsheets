@@ -152,16 +152,46 @@ Undo commits and create a new branch (better within collaborating teams)
     git remote add origin <"github-url">
     git remote -v
     git push origin <branchname>
+    git push -u origin <branchname>
 
 
 1. Create new repository in Github
 2. connect local repo to Github repo
 3. check, if orign equals remote github url
 4. push to remote repository
+5. (alternative to 4) push to remote repo and setup upstream to default
+6. before pushing stuff up, always pull down to see, if there are changes
 
+### Working with remote branches
 
+After cloning the repo, i only see main (or master) branch locally
+To swith to remote branch origin/puppies => remote is usually called "origin"
 
+    git switch puppies
 
+To see remote branches
 
+    git branch -r
+
+### Fetching from remote
+
+To fetch into local repository BUT not into working directory:
+
+    git fetch
+    git fetch <remote>
+    git fetch <remote> <branch>
+
+To look at those changes, checkout to remote master branch like:
+
+    git checkout origin/master
+
+### Pulling from remote
+
+To get changes from remote and integrate them into local working directory. It update the branch, that you are currently on (e.g. being on master will update master branch)
+
+    git pull
+    git pull <remote> <branch>
+
+Pulls can result in conflicts - just resolve them and than add, commit and push changes.
 
 
