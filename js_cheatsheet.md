@@ -49,3 +49,63 @@
     var fibonacciSequenz = fibonacciGenerator(20)
     console.log(fibonacciSequenz)
 
+### Map Function
+
+> Create a new array by doing something with each item in an array. Map expects a function as an arguement.
+
+    var numbers = [1, 34, 65, 77]
+    var doubleNumbers = numbers.map((x) => {
+        return x*2
+    });
+
+> Or shorter
+
+    var numbers = [1, 34, 65, 77]
+    var doubleNumbers = numbers.map(x => x*2);
+
+### Filter Function
+> Create a new array by keeping the items that return true.
+
+    var numbers = [1, 34, 65, 77]
+    var evenNumbers = numbers.filter( function (num) {
+        return num % 2 === 0
+    })
+
+> or shorter 
+
+    var numbers = [1, 34, 65, 77]
+    var evenNumber = number.filter(num => num % 2 === 0)
+
+### Reduce Function 
+
+> Accumulate a value by doing something to each item in an array.
+
+    var numbers = [1, 34, 65, 77]
+    var sum = numbers.reduce( function(accumulator, currentNumber) {
+        return accumulator + currentNumber
+    })
+
+> or shorter
+
+     var numbers = [1, 34, 65, 77]
+     var sum = numbers.reduce((accumulator, currentNumber) => accumulator + currentNumber )
+
+### Find Function
+
+> Find - find the first item that matches from an array.
+
+    var numbers = [1, 34, 65, 77]
+    var newNumber = numbers.find( function(num) {
+        return num > 10
+    })
+
+> or shorter
+
+    var numbers = [1, 34, 65, 77]
+    var newNumber = numbers.find( num => num > 10)
+
+
+### FindIndex Function
+
+    var numbers = [1, 34, 65, 77]
+    var index = numbers.findIndex( num => num > 10)
