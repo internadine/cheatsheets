@@ -42,8 +42,8 @@ Adding changes (each file or all)
 
 Committing changes
 
-    git commit -m "commit message in present tense"
-    git commit -a -m "commit message including adding all changes"
+    git commit -m "commit interpretation in present tense"
+    git commit -a -m "commit interpretation including adding all changes"
 
 
 Amending Commits (only to last commit)
