@@ -109,3 +109,47 @@
 
     var numbers = [1, 34, 65, 77]
     var index = numbers.findIndex( num => num > 10)
+    
+### Vue3 Composition API
+
+    <template>
+        <div class="center">
+
+            <input
+            type="text"
+            v-model="search"
+            >
+        <div
+            v-for="name in matchingNames"
+            :key="name"
+        >{{name}}</div>
+        <button
+        class="button"
+        @click="changeName"
+        >Change my name</button>
+        </div>
+     </template>
+
+    <script>
+     import { computed, onMounted, ref } from "vue";
+
+    export default {
+        data() {
+            return {};
+        },
+        methods: {},
+        setup() {
+            const search = ref("");
+            const names = ref(["John", "Jane", "Joe", "Jack", "Jill", "Jenny"]);
+
+            const matchingNames = computed(() => {
+                return names.value.filter((name) => name.includes(search.value));
+            });
+            onMounted(() => {
+                console.log("mounted");
+            });
+
+        return { names, search, matchingNames };
+        },
+    };
+    </script>    
