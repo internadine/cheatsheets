@@ -47,12 +47,14 @@
 ### Submit Data to Firestore (Composition API)
 
     import {ref} from 'vue'
+    import getUser from '..composables/getUser'
     import db from '../../initfirestore.js'
     import {addDocs, collection} from 'firebase/firestore'
 
     export default {
 
         setup() {
+            const {user} = getUser()
             const author = ref('')
             const title = ref('')
 
@@ -63,6 +65,7 @@
                     title: title.value,
                     author: author.value,
                     isFav: true
+                    userUid: user.value.uid
                     })
                 // reset the form
                 author.value = ''

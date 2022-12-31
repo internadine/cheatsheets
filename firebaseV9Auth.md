@@ -178,3 +178,118 @@
             app = createApp(App).use(router).mount('#app')
         }
     })
+
+### Route Guard
+
+    // add to router index.js
+
+    import Home from '../views/Home.vue'
+    import Login from '../views/Login.vue'
+
+    // firebase imports
+    import {auth} from "../../initfirestore.js"
+
+    const requireAuth = (to, from, next) => {
+        let user = auth.currentUser
+        if (!user) {
+            // redirect to login page
+            next({name: 'Login'})
+        } else {
+            next()
+        }
+    }
+
+    const routes = [
+        {
+            path: '/',
+            name: 'Home',
+            component: Home,
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login,
+            beforeEnter: requireAuth
+        },...
+
+    ]
+
+### Redirecting Users, after logging out
+
+    // add code to navbar, where we already use composable getUser()
+
+    <script>
+    import {getUser} from '../composables/getUser'
+    import {useRotuer} from 'vue-router'
+    import {watchEffect} from 'vue'
+
+    // firebase imports
+    import {auth} from "../../initfirestore.js"
+    import {signOut} from 'firebase/auth'
+
+    export default {
+        setup() {
+            const {user} = getUser()
+            const router = useRouter()
+
+            const handleClick = () => {
+                singOut(auth)
+            }
+
+            watchEffect(() => {
+                if(!user.value) {
+                    router.push('/login')
+                }
+            })
+
+            return {handleclick, user}
+
+
+        }
+    }
+    </script>
+
+### Getting firestore content based on user id (e.g. only see your content)
+
+    // user Id has been saved to User Object in Firstore
+    // add to getCollection.js in composables
+
+    import {ref, watchEffect} from 'vue'
+
+    // firebase imports
+    import {db} from '../../initfirstore.js'
+    import {collection, onSnapshot, query, where} from 'firebase/firestore'
+
+    const getCollection = (c, q) =>  {
+        const documents = ref(null)
+
+        // collection reference
+        let colRef = collection(db, c)
+
+        if(q) {
+            colRef = query(colRef, where(...q))
+        }
+
+
+        const unsub = onSnapshot(colRef, snapshot ={
+            let results = []
+            snapshot.docs.forEach( doc => {
+                results.push({...doc.data(), id: doc.id})
+            })
+
+            // udate values
+            documents.value = results
+        })
+    }
+
+    // pass q in from Home.vue when the initial query to firstore starts
+
+    ...
+    setup() {
+        const {user} = getUser()
+        const {documents: books} = getCollection(
+            'books',
+            ['userUid', '==', user.value.uid ]
+        )
+    }
